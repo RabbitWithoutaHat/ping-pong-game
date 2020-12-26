@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Ball : MonoBehaviour
 {
-    [SerializeField] private int _JumpPower = 10;
+    // Start is called before the first frame update
+    [SerializeField] private int _Speed = 5;
 
     private Vector2 _StartSpeed;
     public Rigidbody2D Rigidbody2D;
     // Start is called before the first frame update
     private void Start()
     {
-        _StartSpeed = new Vector2(_JumpPower, _JumpPower);
+        _StartSpeed = new Vector2(_Speed, _Speed);
         Rigidbody2D.velocity = _StartSpeed;
     }
 
     // Update is called once per frame
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Jump");
-            Rigidbody2D.velocity = new Vector2(0, _JumpPower);
-        }
-    }
     private void FixedUpdate()
     {
         var currentVelocity = Rigidbody2D.velocity;

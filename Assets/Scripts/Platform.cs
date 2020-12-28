@@ -3,35 +3,47 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum PlatformType
+{
+    Player, Enemy
+}
+
 public class Platform : MonoBehaviour
 {
+    public PlatformType PlatformType;
     public Rigidbody2D Rigidbody2D;
-    public TextMeshProUGUI TextMeshProUGUI;
 
-    public int Scores = 0;
+    [Range(0, 1)]
+    public float SpeedKof = 1;
+
+    private Ball _Ball;
+    private Vector3 _TargetPosition;
+
     private void Start()
     {
-        TextMeshProUGUI = GameObject.Find("ScoresText").GetComponent<TextMeshProUGUI>();
         Rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-        TextMeshProUGUI.text = Scores.ToString();
+        _Ball = FindObjectOfType<Ball>();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        var worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Rigidbody2D.MovePosition(worldMousePosition);
 
-    }
+        var targetPosition = new Vector3();
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // if (other.gameObject.tag == "Player")
-        if (other.gameObject.GetComponent<Ball>() != null)
+
+        if (PlatformType == PlatformType.Enemy)
         {
-            Scores++;
-            TextMeshProUGUI.text = Scores.ToString();
+            targetPosition = _Ball.transform.position;
+        }
+        else
+        {
+            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
+        _TargetPosition = Vector3.Lerp(_TargetPosition, targetPosition, SpeedKof);
+
+
+        Rigidbody2D.MovePosition(_TargetPosition);
     }
 }

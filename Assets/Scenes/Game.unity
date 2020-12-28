@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7b14b6fb69bcc488cbe8ff5a5ea9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GabePrefab: {fileID: 3548637572391081999, guid: b031d065b07a67f4f801136b836a0738,
+  ScoreText: {fileID: 1000832389}
+  GamePrefab: {fileID: 3548637572391081999, guid: b031d065b07a67f4f801136b836a0738,
     type: 3}
 --- !u!4 &416084161
 Transform:

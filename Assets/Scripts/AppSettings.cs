@@ -111,7 +111,10 @@ public class AppSettings : MonoBehaviour
 
     private void ChangeScores(int value)
     {
-        TotalScores += value;
+        if (value > 0)
+        {
+            TotalScores += value;
+        }
         _Scores += value;
         if (_Scores <= 0)
         {
